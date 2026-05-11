@@ -14,3 +14,14 @@ CREATE TABLE products (
 ALTER TABLE products 
 ADD COLUMN date_added    DATETIME DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN date_updated  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+
+ ALTER TABLE products ADD COLUMN low_stock_alert INT DEFAULT 5;
+
+CREATE TABLE sales (
+    saleID     INT AUTO_INCREMENT PRIMARY KEY,
+    date_sold  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    productID  INT, productName VARCHAR(100), category VARCHAR(50),
+    qty_sold   INT, unit_price DECIMAL(10,2), subtotal DECIMAL(10,2),
+    FOREIGN KEY (productID) REFERENCES products(productID)
+    );
